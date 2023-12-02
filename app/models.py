@@ -1,9 +1,6 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, Date, Enum
-from sqlalchemy.orm import DeclarativeBase
 
-
-class Base(DeclarativeBase):
-    pass
+from app.database import Base
 
 
 class StatusEnum(Enum):
