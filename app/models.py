@@ -5,6 +5,7 @@ from app.database import Base
 
 class StatusEnum(Enum):
     created = "created"
+    taken_to_work = 'taken to work'
     done = "done"
 
 
@@ -24,6 +25,6 @@ class Task(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String(255), nullable=False)
     parent_task = Column(Integer, ForeignKey('tasks.id', ondelete='CASCADE'), nullable=True, index=True)
-    performer = Column(Integer, ForeignKey('employees.id', ondelete='CASCADE'), nullable=False, index=True)
+    performer = Column(Integer, ForeignKey('employees.id', ondelete='SET NULL'), nullable=True, index=True)
     deadline = Column(Date, nullable=False)
     status = Column(StatusEnum(name='status_enum', create_type=False), default=StatusEnum.created, nullable=False)
