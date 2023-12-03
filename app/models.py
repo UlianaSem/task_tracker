@@ -1,12 +1,8 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, Date, Enum
+from sqlalchemy import Column, Integer, String, ForeignKey, Date
+from sqlalchemy.dialects.postgresql import ENUM
 
 from app.database import Base
-
-
-class StatusEnum(Enum):
-    created = "created"
-    taken_to_work = 'taken to work'
-    done = "done"
+from app.schemas import StatusEnum
 
 
 class Employee(Base):
@@ -27,4 +23,4 @@ class Task(Base):
     parent_task = Column(Integer, ForeignKey('tasks.id', ondelete='CASCADE'), nullable=True, index=True)
     performer = Column(Integer, ForeignKey('employees.id', ondelete='SET NULL'), nullable=True, index=True)
     deadline = Column(Date, nullable=False)
-    status = Column(StatusEnum(name='status_enum', create_type=False), default=StatusEnum.created, nullable=False)
+    status = Column(ENUM(StatusEnum, name='status_enum', create_type=False), default=StatusEnum.created, nullable=False)
