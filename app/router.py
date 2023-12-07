@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
-from app import schemas, crud, database
+from app import schemas, crud, database, serviсes
 
 
 employees_router = APIRouter(prefix="/employee", tags=['Employee'])
@@ -90,3 +90,13 @@ def delete_task(task_id: int, db: Session = Depends(database.get_db)):
         raise HTTPException(status_code=404, detail="Task not found")
 
     return crud.delete_task(db=db, task_id=task_id)
+
+
+@employees_router.get('/busy/', response_model=list[schemas.BusyEmployee])
+def get_busy_employees(skip: int = 0, limit: int = 20, db: Session = Depends(database.get_db)):
+    return serviсes.get_busy_employees(skip=skip, limit=limit, db=db)
+
+
+@tasks_router.get('/major/')
+def get_major_tasks(skip: int = 0, limit: int = 20, db: Session = Depends(database.get_db)):
+    return serviсes.get_major_tasks(skip=skip, limit=limit, db=db)

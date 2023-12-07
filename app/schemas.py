@@ -62,3 +62,11 @@ class Task(TaskBase):
 
     class Config:
         orm_mode = True
+
+
+class BusyEmployee(EmployeeBase):
+    id: int
+    first_name: str
+    last_name: str
+    position: str
+    tasks: list[Task]

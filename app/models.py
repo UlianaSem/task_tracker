@@ -1,5 +1,6 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, Date
 from sqlalchemy.dialects.postgresql import ENUM
+from sqlalchemy.orm import relationship
 
 from app.database import Base
 from app.schemas import StatusEnum
@@ -13,6 +14,8 @@ class Employee(Base):
     last_name = Column(String(150), nullable=False)
     patronymic = Column(String(150), nullable=True)
     position = Column(String(200), nullable=False)
+
+    tasks = relationship('Task')
 
 
 class Task(Base):
