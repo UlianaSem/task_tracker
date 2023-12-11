@@ -28,7 +28,7 @@ class Employee(EmployeeBase):
     position: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class StatusEnum(Enum):
@@ -61,7 +61,7 @@ class Task(TaskBase):
     status: StatusEnum
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class BusyEmployee(EmployeeBase):
@@ -70,3 +70,9 @@ class BusyEmployee(EmployeeBase):
     last_name: str
     position: str
     tasks: list[Task]
+
+
+class MajorTask(BaseModel):
+    name: str
+    deadline: date
+    employees: list[str]

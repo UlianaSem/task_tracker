@@ -97,6 +97,6 @@ def get_busy_employees(skip: int = 0, limit: int = 20, db: Session = Depends(dat
     return serviсes.get_busy_employees(skip=skip, limit=limit, db=db)
 
 
-@tasks_router.get('/major/')
+@tasks_router.get('/major/', response_model=list[schemas.MajorTask])
 def get_major_tasks(skip: int = 0, limit: int = 20, db: Session = Depends(database.get_db)):
     return serviсes.get_major_tasks(skip=skip, limit=limit, db=db)
