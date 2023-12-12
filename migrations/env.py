@@ -1,11 +1,8 @@
-import alembic_postgresql_enum
-
 from logging.config import fileConfig
 
+from alembic import context
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
-
-from alembic import context
 
 from app.models import Base
 from config import POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_USER, DATABASES_HOST
