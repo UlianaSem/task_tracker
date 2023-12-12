@@ -57,8 +57,7 @@ def get_major_tasks(db: Session, skip: int = 0, limit: int = 20):
             db.query(task.id).filter(
                 task.status == 'taken_to_work'
             )
-        )
-             )
+        ))
     ).subquery()
 
     query_2 = db.query(
