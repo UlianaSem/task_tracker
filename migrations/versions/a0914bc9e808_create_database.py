@@ -9,6 +9,7 @@ from typing import Sequence, Union
 
 from alembic import op
 import sqlalchemy as sa
+from sqlalchemy.dialects import postgresql
 
 import app
 
@@ -36,7 +37,7 @@ def upgrade() -> None:
     sa.Column('parent_task', sa.Integer(), nullable=True),
     sa.Column('performer', sa.Integer(), nullable=False),
     sa.Column('deadline', sa.Date(), nullable=False),
-    sa.Column('status', app.models.StatusEnum(name='status_enum'), nullable=False),
+    sa.Column('status', postgresql.ENUM('created', 'taken_to_work', 'done', name='status_enum'), nullable=False),
     sa.ForeignKeyConstraint(['parent_task'], ['tasks.id'], ondelete='CASCADE'),
     sa.ForeignKeyConstraint(['performer'], ['employees.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
