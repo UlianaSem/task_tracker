@@ -15,6 +15,8 @@
 - PostgreSQL
 - SQLAlchemy
 - Alembic
+- Docker
+- Docker Compose
 
 ## Зависимости
 
@@ -30,11 +32,12 @@
 ## Как запустить проект
 
 Для запуска проекта необходимо выполнить следующие шаги:
-1. Cклонируйте репозиторий себе на компьютер
-2. Создайте БД
+1. При необходимости установите Docker и Docker Compose на компьютер с помощью инструкции https://docs.docker.com/engine/install/
+2. Cклонируйте репозиторий себе на компьютер
 3. Создайте файл .env и заполните его, используя образец из файла .env.example
-4. Выполните миграции командой `alembic epgrade head`
-5. Запустите проект командой `uvicorn app.main:app`
+4. Соберите образ с помощью команды `docker-compose build`
+5. Создайте БД командой `docker-compose exec db psql -U <postgres_user>`, а затем командой `CREATE DATABASE <database_name>;`
+6. Запустите контейнеры с помощью команды `docker-compose up`
 
 ## Файл .env.example
 
